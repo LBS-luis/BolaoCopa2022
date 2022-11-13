@@ -6,6 +6,7 @@ import logoImg from '../../assets/logo.svg'
 import iconCheck from '../../assets/check.svg'
 //components
 import LateralMenu from '../../components/LateralMenu'
+
 //interface
 interface HomePorps {
   poolCount: number,
@@ -17,6 +18,7 @@ export default function Home(props: HomePorps) {
   const [poolName, setPoolName] = useState<string>("")
 
   //effects
+  
 
   const createPool = async (evet: FormEvent) => {
     event?.preventDefault()
