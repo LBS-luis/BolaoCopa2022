@@ -36,6 +36,34 @@ async function server(){
         return {count}
     })
 
+    //verifica se o usuario existe apartir do email
+    fastify.get('/login', async (req, res) => {        
+        
+        const IGetUser = z.object({
+            email: z.string(),
+            password: z.string()
+        })
+
+        try{
+            const getUser = IGetUser.parse(
+                {
+                    email: req.headers?.email,
+                    password: req.headers?.password   
+                })
+
+            let query = await prisma.user.findUnique({
+                where:{
+                   email_password: getUser 
+                }
+            })
+            
+            query != null ? res.status(200).send({status:200, email: query.email, name: query.name, avatar: query.avatarUrl}) : res.status(400).send({status:400})
+        }
+        catch(err){
+            return res.status(500).send({err})
+        }
+    })
+
     //post
     fastify.post('/pools/create', async (req, res) => {
         const createPoolBody = z.object({

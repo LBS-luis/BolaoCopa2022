@@ -49,6 +49,8 @@ model User {
 
   participatingAt Participant[]
   ownPools        Pool[]
+
+  @@unique([email, password])
 }
 
 model Game {
